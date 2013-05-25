@@ -6,7 +6,7 @@ require 'json'
 require 'pp'
 
 class PoolInfo
-  SUCCESS = 200
+  SUCCESS_CODE = 200
   TIMEOUT = 10
 
   def initialize(key)
@@ -14,8 +14,8 @@ class PoolInfo
   end
 
   def run
-    response = HTTParty.get("http://50btc.com/api/#{@key}?text=1")#, :timeout => TIMEOUT)
-    print_error(response.code, response.body) if response.code != SUCCESS
+    response = HTTParty.get("https://50btc.com/api/#{@key}?text=1")#, :timeout => TIMEOUT)
+    print_error(response.code) if response.code != SUCCESS_CODE
     json_response = JSON.parse(response.body)
 
     # Adjust worker info
@@ -28,8 +28,8 @@ class PoolInfo
   end
 
   private
-  def print_error(code, msg)
-    puts "Error retreiving pool information. Code #{code}:\n#{msg}"
+  def print_error(code)
+    puts "Error retreiving pool information. Code #{code}"
     Kernel.exit! -1
   end
 
@@ -47,4 +47,5 @@ class PoolInfo
   end
 end
 
+# Execute
 PoolInfo.new(ARGV[0]).run

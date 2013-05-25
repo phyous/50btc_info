@@ -18,7 +18,7 @@ Script for retrieving info about your [50btc.com](https://50btc.com) mining pool
 
 5- You should be able to type 'btc_info' in your console and see info about your machine pool
 
-Ex:
+Ex Output:
 ```
 {
     "user": {
